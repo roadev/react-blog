@@ -1,0 +1,24 @@
+{
+  "name": "react-blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roadev/react-blog.git"
+  },
+  "keywords": [
+    "react",
+    "react",
+    "blog"
+  ],
+  "author": "Juan Roa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/roadev/react-blog/issues"
+  },
+  "homepage": "https://github.com/roadev/react-blog#readme"
+}
