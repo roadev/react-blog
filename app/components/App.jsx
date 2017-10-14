@@ -9,7 +9,6 @@ import Nav from './Nav/Nav';
 import About from './About/About';
 import Home from './Home/Home';
 import PageNotFound from './PageNotFound/PageNotFound';
-import style from './style.css';
 
 const App = ({ header }) => (
   <Router>

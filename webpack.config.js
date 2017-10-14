@@ -60,10 +60,28 @@ module.exports = {
             loader: 'css-loader',
             options:
             {
-              sourceMap: true,
+              // sourceMap: true,
               modules: true,
               importLoaders: 1,
-              localIdentName: '[name]__[local]___[hash:base64:5]',
+              localIdentName: '[name]__[local]___[hash:base64:8]',
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: (loader) => [
+                require('postcss-smart-import'),
+                require('autoprefixer'),
+              ],
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options:
+            {
+              sourceMap: true,
+              data: `@import "${__dirname}/app/components/theme.scss";`,
             },
           },
         ],

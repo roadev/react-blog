@@ -44,10 +44,15 @@
   },
   "dependencies": {
     "isomorphic-fetch": "^2.2.1",
+    "postcss": "^6.0.13",
+    "postcss-cssnext": "^3.0.2",
+    "postcss-loader": "^2.0.7",
+    "postcss-smart-import": "^0.7.5",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-router": "^4.2.0",
-    "react-router-dom": "^4.2.2"
+    "react-router-dom": "^4.2.2",
+    "react-toolbox": "^2.0.0-beta.12"
   }
 }

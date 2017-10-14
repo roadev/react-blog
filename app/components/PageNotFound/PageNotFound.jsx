@@ -5,7 +5,6 @@ import Nav from '../Nav/Nav';
 const PageNotFound = () =>
   (
     <div>
-      <Nav />
       <h3>
         404 - Not found!
       </h3>
