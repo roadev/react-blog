@@ -9,13 +9,12 @@ import Nav from './Nav/Nav';
 import About from './About/About';
 import Home from './Home/Home';
 import PageNotFound from './PageNotFound/PageNotFound';
-import style from './style.css';
 
-const App = ({ header }) => (
+const App = () => (
   <Router>
     <Switch>
       <Route path='/' exact component={Home} />
-      <Route path='/about' exact component={About} />
+      <Route path='/about/' exact component={About} />
       <Route component={PageNotFound}/>
       {/* <Route path='/posts' /> */}
     </Switch>
