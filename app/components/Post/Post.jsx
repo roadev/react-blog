@@ -23,7 +23,13 @@ class Post extends Component {
     const commentItem = (
       <Comment
         key={this.state.commentsCount}
-        { ...comment }
+        name={comment.get('name')}
+        email={comment.get('email')}
+        country={comment.get('country')}
+        age={comment.get('age')}
+        date={comment.get('date')}
+
+        // { ...comment }
       />
     );
 
