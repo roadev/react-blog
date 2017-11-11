@@ -44,7 +44,7 @@ class Posts extends Component {
     this.setState({
       posts,
       postsCount: this.state.postsCount + 1,
-    });
+    }, () => this.handleCloseForm());
   };
 
   handleShowForm = () => {

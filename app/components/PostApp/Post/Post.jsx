@@ -3,7 +3,7 @@ import { Button } from 'react-toolbox/lib/button';
 import { Card, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
 import PropTypes from 'prop-types';
 
-import PostForm from '../PostForm/PostForm';
+// import PostForm from '../PostForm/PostForm';
 import Comments from '../Comments/Comments';
 
 class Post extends Component {
@@ -27,13 +27,13 @@ class Post extends Component {
 
     return (
       <div>
-        <PostForm
+        {/* <PostForm
           showForm={this.props.showForm}
           createPost={this.props.createPost}
           handleCloseForm={this.props.handleCloseForm}
           post={this.state.postState}
-        />
-        <Card>
+        /> */}
+        <Card style={{ width: 300 }}>
           <CardTitle
             title={title}
             subtitle={date}
