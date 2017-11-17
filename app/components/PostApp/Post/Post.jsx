@@ -21,18 +21,27 @@ class Post extends Component {
     deletePost(id);
   };
 
+  handleEditPost = () => {
+    const { title, body, date, handleEdit } = this.props;
+    handleEdit({
+      title,
+      body,
+      date,
+    });
+  };
+
   render() {
 
     const { title, body, date } = this.props;
 
     return (
       <div>
-        <PostForm
+        {/* <PostForm
           showForm={this.props.showForm}
           createPost={this.props.createPost}
           handleCloseForm={this.props.handleCloseForm}
           post={this.state.postState}
-        />
+        /> */}
         <Card>
           <CardTitle
             title={title}
@@ -45,7 +54,7 @@ class Post extends Component {
               onClick={this.handleToggleComments}
             />
             <Button
-              label="edit post"
+              label="Edit post"
               onClick={this.handleEditPost}
             />
             <Button
@@ -72,6 +81,7 @@ Post.propTypes = {
   showForm: PropTypes.bool.isRequired,
   deletePost: PropTypes.func.isRequired,
   createPost: PropTypes.func.isRequired,
+  handleEdit: PropTypes.func.isRequired,
   handleCloseForm: PropTypes.func.isRequired,
 
 }

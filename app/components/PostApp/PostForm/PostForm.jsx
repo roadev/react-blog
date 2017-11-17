@@ -30,11 +30,10 @@ class PostForm extends Component {
     postState: PostForm.defaultPost(),
   };
 
-  componentWillMount() {
-    const { post } = this.props;
-    if (post) {
-      this.setState({ postState: post, creation: false });
-    }
+  componentWillReceiveProps(nextProps) {
+    const { post } = nextProps;
+    console.log(post);
+    this.setState({ postState: post || PostForm.defaultPost(), creation: false });
   }
 
   handleCreatePost = () => {
@@ -43,7 +42,7 @@ class PostForm extends Component {
     // const comment = Object.assign({}, this.state, { date: Date() });
     const post = this.state.postState.set('date', Date());
     console.log(post);
-    createPost(post);
+    this.setState({ postState: PostForm.defaultPost() }, () => createPost(post));
   };
 
   handleOnChange = (key, value) => {
@@ -54,6 +53,7 @@ class PostForm extends Component {
   render() {
 
     const { handleCloseForm } = this.props;
+    console.log(this.state.postState);
 
     const actions = [
       { label: "Cancel", onClick: handleCloseForm },
