@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { List } from 'immutable';
+import { List, fromJS } from 'immutable';
 import IconButton from 'react-toolbox/lib/button';
 import Post from './Post/Post';
 import PostForm from './PostForm/PostForm';
@@ -10,6 +10,7 @@ class Posts extends Component {
     posts: List(),
     postsCount: 1,
     showForm: false,
+    postToEdit: undefined,
   };
 
   handleDeletePost = (id) => {
@@ -19,6 +20,11 @@ class Posts extends Component {
     console.log(posts);
     this.setState({ posts });
   }
+
+  handleEditForm = (post) => {
+    console.log(post);
+    this.setState({ showForm: true, postToEdit: fromJS(post) });
+  };
 
   handleCreatePost = (post) => {
     const postItem = (
@@ -30,7 +36,7 @@ class Posts extends Component {
         // tags={comment.get('country')}
         date={post.get('date')}
         deletePost={this.handleDeletePost}
-
+        handleEdit={this.handleEditForm}
         showForm={this.state.showForm}
         createPost={this.handleCreatePost}
         handleCloseForm={this.handleCloseForm}
@@ -52,12 +58,11 @@ class Posts extends Component {
   };
 
   handleCloseForm = () => {
-    this.setState({ showForm: false });
+    this.setState({ showForm: false, postToEdit: undefined });
   };
 
-
   render() {
-
+    console.log(this.state.showForm);
     return (
       <div>
         {this.state.posts}
@@ -65,6 +70,7 @@ class Posts extends Component {
           showForm={this.state.showForm}
           createPost={this.handleCreatePost}
           handleCloseForm={this.handleCloseForm}
+          post={this.state.postToEdit}
         />
         <IconButton
           icon="add"

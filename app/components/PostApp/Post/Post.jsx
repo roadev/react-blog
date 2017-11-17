@@ -21,6 +21,15 @@ class Post extends Component {
     deletePost(id);
   };
 
+  handleEditPost = () => {
+    const { title, body, date, handleEdit } = this.props;
+    handleEdit({
+      title,
+      body,
+      date,
+    });
+  };
+
   render() {
 
     const { title, body, date } = this.props;
@@ -33,7 +42,11 @@ class Post extends Component {
           handleCloseForm={this.props.handleCloseForm}
           post={this.state.postState}
         /> */}
+<<<<<<< HEAD
         <Card style={{ width: 300 }}>
+=======
+        <Card>
+>>>>>>> 9988d6609612a8a360b93de7be2ae7a9bf5b3cac
           <CardTitle
             title={title}
             subtitle={date}
@@ -45,7 +58,7 @@ class Post extends Component {
               onClick={this.handleToggleComments}
             />
             <Button
-              label="edit post"
+              label="Edit post"
               onClick={this.handleEditPost}
             />
             <Button
@@ -72,6 +85,7 @@ Post.propTypes = {
   showForm: PropTypes.bool.isRequired,
   deletePost: PropTypes.func.isRequired,
   createPost: PropTypes.func.isRequired,
+  handleEdit: PropTypes.func.isRequired,
   handleCloseForm: PropTypes.func.isRequired,
 
 }
