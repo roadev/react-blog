@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { List, fromJS } from 'immutable';
+import { merge, findIndex } from 'lodash/fp';
 import { Button } from 'react-toolbox/lib/button';
 import Post from './Post/Post';
 import PostForm from './PostForm/PostForm';
@@ -7,7 +8,7 @@ import PostForm from './PostForm/PostForm';
 class Posts extends Component {
 
   state = {
-    posts: List(),
+    posts: [],
     postsCount: 1,
     showForm: false,
     postToEdit: undefined,
@@ -28,11 +29,12 @@ class Posts extends Component {
 
   handleEdit = (post) => {
     console.log(post);
-    const postIndex = this.state.posts.findIndex(p => p.key === post.id);
+    const postIndex = findIndex(p => p.key === `${post.get('id')}`)(this.state.posts);
+    console.log(postIndex);
     const postItem = (
       <Post
-        key={this.state.postsCount}
-        id={this.state.postsCount}
+        key={post.get('id')}
+        id={post.get('id')}
         title={post.get('title')}
         body={post.get('body')}
         // tags={comment.get('country')}
@@ -44,7 +46,13 @@ class Posts extends Component {
         handleCloseForm={this.handleCloseForm}
       />
     );
-    const posts = this.state.posts.set(postIndex, postItem);
+    const posts = this.state.posts.map((p, i) => {
+      if (i === postIndex) {
+        return merge(p, postItem);
+      }
+      return p;
+    });
+    // const posts = this.state.posts.set(postIndex, postItem);
     this.setState({ posts }, () => this.handleCloseForm());
   };
 

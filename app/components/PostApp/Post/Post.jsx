@@ -22,8 +22,9 @@ class Post extends Component {
   };
 
   handleEditPost = () => {
-    const { title, body, date, handleEdit } = this.props;
+    const { id, title, body, date, handleEdit } = this.props;
     handleEdit({
+      id,
       title,
       body,
       date,
