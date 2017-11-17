@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { List, fromJS } from 'immutable';
-import IconButton from 'react-toolbox/lib/button';
+import { Button } from 'react-toolbox/lib/button';
 import Post from './Post/Post';
 import PostForm from './PostForm/PostForm';
 
@@ -26,6 +26,28 @@ class Posts extends Component {
     this.setState({ showForm: true, postToEdit: fromJS(post) });
   };
 
+  handleEdit = (post) => {
+    console.log(post);
+    const postIndex = this.state.posts.findIndex(p => p.key === post.id);
+    const postItem = (
+      <Post
+        key={this.state.postsCount}
+        id={this.state.postsCount}
+        title={post.get('title')}
+        body={post.get('body')}
+        // tags={comment.get('country')}
+        date={post.get('date')}
+        deletePost={this.handleDeletePost}
+        handleEdit={this.handleEditForm}
+        showForm={this.state.showForm}
+        createPost={this.handleCreatePost}
+        handleCloseForm={this.handleCloseForm}
+      />
+    );
+    const posts = this.state.posts.set(postIndex, postItem);
+    this.setState({ posts }, () => this.handleCloseForm());
+  };
+
   handleCreatePost = (post) => {
     const postItem = (
       <Post
@@ -40,12 +62,10 @@ class Posts extends Component {
         showForm={this.state.showForm}
         createPost={this.handleCreatePost}
         handleCloseForm={this.handleCloseForm}
-
-        // { ...post }
       />
     );
 
-    const posts = this.state.posts.concat(postItem);
+    const posts = this.state.posts.concat([postItem]);
 
     this.setState({
       posts,
@@ -69,11 +89,13 @@ class Posts extends Component {
         <PostForm
           showForm={this.state.showForm}
           createPost={this.handleCreatePost}
+          editPost={this.handleEdit}
           handleCloseForm={this.handleCloseForm}
           post={this.state.postToEdit}
         />
-        <IconButton
+        <Button
           icon="add"
+          label="Create post"
           onClick={this.handleShowForm}
         />
       </div>

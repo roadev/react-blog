@@ -42,11 +42,8 @@ class Post extends Component {
           handleCloseForm={this.props.handleCloseForm}
           post={this.state.postState}
         /> */}
-<<<<<<< HEAD
         <Card style={{ width: 300 }}>
-=======
-        <Card>
->>>>>>> 9988d6609612a8a360b93de7be2ae7a9bf5b3cac
+
           <CardTitle
             title={title}
             subtitle={date}

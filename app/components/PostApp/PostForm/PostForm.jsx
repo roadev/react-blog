@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
+import { isNil } from 'lodash/fp';
 import Input from 'react-toolbox/lib/input';
 import Dialog from 'react-toolbox/lib/dialog';
 import { fromJS } from 'immutable';
@@ -11,6 +12,7 @@ class PostForm extends Component {
   static propTypes = {
     showForm: PropTypes.bool.isRequired,
     createPost: PropTypes.func.isRequired,
+    editPost: PropTypes.func.isRequired,
     post: ImmutablePropTypes.map,
   };
 
@@ -33,7 +35,7 @@ class PostForm extends Component {
   componentWillReceiveProps(nextProps) {
     const { post } = nextProps;
     console.log(post);
-    this.setState({ postState: post || PostForm.defaultPost(), creation: false });
+    this.setState({ postState: post || PostForm.defaultPost(), creation: isNil(post) });
   }
 
   handleCreatePost = () => {
@@ -45,6 +47,16 @@ class PostForm extends Component {
     this.setState({ postState: PostForm.defaultPost() }, () => createPost(post));
   };
 
+  handleEditPost = () => {
+    const { editPost } = this.props;
+    const postState = this.state.postState;
+    console.log(this.state.postState);
+    this.setState(
+      { postState: PostForm.defaultPost() },
+      () => editPost(postState),
+    );
+  };
+
   handleOnChange = (key, value) => {
     const postState = this.state.postState.set(key, value);
     this.setState({ postState });
@@ -53,14 +65,15 @@ class PostForm extends Component {
   render() {
 
     const { handleCloseForm } = this.props;
-    console.log(this.state.postState);
+    // console.log(this.state.postState);
 
     const actions = [
       { label: "Cancel", onClick: handleCloseForm },
       {
         label: this.state.creation ?
           "Create post" : "Update post",
-        onClick: this.handleCreatePost,
+        onClick: this.state.creation ?
+          this.handleCreatePost : this.handleEditPost,
       }
     ];
 
