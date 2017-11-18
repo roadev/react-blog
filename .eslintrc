@@ -1,0 +1,23 @@
+{
+  // Use the AirBnB JS styleguide - https://github.com/airbnb/javascript
+  "extends": "airbnb",
+  // We use 'babel-eslint' mainly for React Native Classes
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "classes": true,
+    },
+  },
+  // We can add/overwrite custom rules here
+  rules: {
+    "arrow-parens": "off",
+    "react/forbid-prop-types": "off",
+    "no-underscore-dangle": "off",
+  },
+  "settings": {
+    "import/resolver": "webpack",
+  },
+}
