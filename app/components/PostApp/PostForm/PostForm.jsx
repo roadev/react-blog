@@ -5,11 +5,12 @@ import { isNil } from 'lodash/fp';
 import Input from 'react-toolbox/lib/input';
 import Dialog from 'react-toolbox/lib/dialog';
 import { fromJS } from 'immutable';
-import style from './style';
+import style from './style.scss';
 
 class PostForm extends Component {
   static propTypes = {
     showForm: PropTypes.bool.isRequired,
+    handleCloseForm: PropTypes.func.isRequired,
     createPost: PropTypes.func.isRequired,
     editPost: PropTypes.func.isRequired,
     post: ImmutablePropTypes.map,
@@ -65,20 +66,19 @@ class PostForm extends Component {
   };
 
   render() {
-
     const { handleCloseForm } = this.props;
 
     const actions = [
-      { label: "Cancel", onClick: handleCloseForm },
+      { label: 'Cancel', onClick: handleCloseForm },
       {
         label: this.state.creation ?
-          "Create post" : "Update post",
+          'Create post' : 'Update post',
         onClick: this.state.creation ?
           this.handleCreatePost : this.handleEditPost,
-      }
+      },
     ];
 
-    return(
+    return (
       <div>
         <Dialog
           actions={actions}

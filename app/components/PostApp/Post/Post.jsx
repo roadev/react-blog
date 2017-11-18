@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button } from 'react-toolbox/lib/button';
 import { Card, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
 import PropTypes from 'prop-types';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 
 // import PostForm from '../PostForm/PostForm';
 import Comments from '../Comments/Comments';
@@ -22,18 +23,12 @@ class Post extends Component {
   };
 
   handleEditPost = () => {
-    const { id, title, body, date, handleEdit } = this.props;
-    handleEdit({
-      id,
-      title,
-      body,
-      date,
-    });
+    const { id, post, handleEdit } = this.props;
+    handleEdit(post.set('id', id));
   };
 
   render() {
-
-    const { title, body, date } = this.props;
+    const { post, date } = this.props;
 
     return (
       <div>
@@ -46,10 +41,10 @@ class Post extends Component {
         <Card style={{ width: 300 }}>
 
           <CardTitle
-            title={title}
+            title={post.get('title')}
             subtitle={date}
           />
-          <CardText>{body}</CardText>
+          <CardText>{post.get('body')}</CardText>
           <CardActions>
             <Button
               label="Comments"
@@ -77,15 +72,11 @@ class Post extends Component {
 }
 
 Post.propTypes = {
-  title: PropTypes.string.isRequired,
-  body: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  post: ImmutablePropTypes.map.isRequired,
   date: PropTypes.string.isRequired,
-  showForm: PropTypes.bool.isRequired,
   deletePost: PropTypes.func.isRequired,
-  createPost: PropTypes.func.isRequired,
   handleEdit: PropTypes.func.isRequired,
-  handleCloseForm: PropTypes.func.isRequired,
-
-}
+};
 
 export default Post;
