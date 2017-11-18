@@ -1,4 +1,5 @@
 import { AsyncStorage } from 'react-native';
+import { assign } from 'lodash/fp';
 
 export const receivePosts = (posts) => (
   {
@@ -18,28 +19,21 @@ export const togglePostsLoading = () => ({
 });
 
 export function createPost(post) {
-  return async (dispatch) => {
-    try {
-      const loans = JSON.parse(await AsyncStorage.getItem('loans'));
-      if (loans) {
-        const newLoans = posts.concat(post);
-        console.log('concat create', newLoans);
-        await AsyncStorage.setItem('loans', JSON.stringify(newLoans));
-      } else {
-        const newLoans = (JSON.stringify([loan]));
-        console.log('new create', newLoans);
-        await AsyncStorage.setItem('loans', newLoans);
-      }
-    } catch (error) {
-      console.log('error', error);
-    }
-    dispatch(refreshLoans());
+  return (dispatch) => {
+    dispatch(togglePostsLoading());
+    return fetch('http://localhost:3000/posts', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(assign({}, post)),
+    })
+    .then(response => dispatch(togglePostsLoading()))
   };
 }
 
+
 export function fetchUsers() {
   return (dispatch) => {
-    dispatch(toggleUsersLoading());
+    dispatch(togglePostsLoading());
     return fetch('http://localhost:3000/posts', {
       method: 'GET',
     })
