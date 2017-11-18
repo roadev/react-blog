@@ -8,7 +8,6 @@ import { fromJS } from 'immutable';
 import style from './style';
 
 class PostForm extends Component {
-
   static propTypes = {
     showForm: PropTypes.bool.isRequired,
     createPost: PropTypes.func.isRequired,
@@ -16,7 +15,7 @@ class PostForm extends Component {
     post: ImmutablePropTypes.map,
   };
 
-  static defaultPost = {
+  static defaultProps = {
     post: undefined,
   };
 
@@ -35,7 +34,10 @@ class PostForm extends Component {
   componentWillReceiveProps(nextProps) {
     const { post } = nextProps;
     console.log(post);
-    this.setState({ postState: post || PostForm.defaultPost(), creation: isNil(post) });
+    this.setState({
+      postState: post || PostForm.defaultPost(),
+      creation: isNil(post),
+    });
   }
 
   handleCreatePost = () => {
@@ -65,7 +67,6 @@ class PostForm extends Component {
   render() {
 
     const { handleCloseForm } = this.props;
-    // console.log(this.state.postState);
 
     const actions = [
       { label: "Cancel", onClick: handleCloseForm },
@@ -111,9 +112,7 @@ class PostForm extends Component {
 
       </div>
     );
-
   }
-
 }
 
 export default PostForm;
