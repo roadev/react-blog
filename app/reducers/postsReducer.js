@@ -14,7 +14,8 @@ export default function postsData(state = initialState, action) {
     case ACTION_TYPES.RECEIVE_POSTS: {
       console.log(action.posts);
       const totalResults = action.posts.length;
-      const posts = fromJS(action.posts).sort(p => p._id);
+      const posts = fromJS(action.posts).sort(p => p.get('title'));
+      console.log(posts);
       return state.withMutations(map => {
         map.set('posts', posts)
           .set('totalResults', totalResults)

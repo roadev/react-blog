@@ -1,4 +1,3 @@
-import { AsyncStorage } from 'react-native';
 import { assign } from 'lodash/fp';
 
 export const receivePosts = (posts) => (
@@ -19,19 +18,20 @@ export const togglePostsLoading = () => ({
 });
 
 export function createPost(post) {
+  console.log(post);
   return (dispatch) => {
-    dispatch(togglePostsLoading());
+    // dispatch(togglePostsLoading());
     return fetch('http://localhost:3000/posts', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(assign({}, post)),
     })
-    .then(response => dispatch(togglePostsLoading()))
+    .then(response => dispatch(refreshPosts()))
   };
 }
 
 
-export function fetchUsers() {
+export function getPosts() {
   return (dispatch) => {
     dispatch(togglePostsLoading());
     return fetch('http://localhost:3000/posts', {
@@ -39,7 +39,8 @@ export function fetchUsers() {
     })
     .then(response => response.json())
     .then(json => {
-      dispatch(receivePosts(json.posts, json.total_results));
+      console.log(json);
+      dispatch(receivePosts(json));
       dispatch(togglePostsLoading());
     });
   };
