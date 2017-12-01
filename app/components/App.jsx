@@ -8,6 +8,7 @@ import {
 import Nav from './Nav/Nav';
 import About from './About/About';
 import Home from './Home/Home';
+import Posts from './PostsApp/Posts';
 import PageNotFound from './PageNotFound/PageNotFound';
 
 const App = ({ header }) => (
@@ -15,8 +16,9 @@ const App = ({ header }) => (
     <Switch>
       <Route path='/' exact component={Home} />
       <Route path='/about' exact component={About} />
+      <Route path='/posts' exact component={Posts} />
       <Route component={PageNotFound}/>
-      {/* <Route path='/posts' /> */}
+
     </Switch>
   </Router>
 );
